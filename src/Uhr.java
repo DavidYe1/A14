@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,9 +15,11 @@ public class Uhr {
     private JPanel Uhr;
     private JLabel h;
     private JLabel min;
-    public int stunde = 00;
-    public int minute = 00;
-    public static int count = 0;
+    private int stunde = 00;
+    private int minute = 00;
+    private int count = 1;
+    private Toolkit noise = Toolkit.getDefaultToolkit();
+
 
     public void setInc(int count) {
 
@@ -92,10 +95,12 @@ public class Uhr {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                count++;
+                if (count < 2) {
+                    noise.beep();
+                }
                 if (count > 2) {
                     count = 0;
-                } else {
-                    count++;
                 }
             }
         });
