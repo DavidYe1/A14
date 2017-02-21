@@ -21,27 +21,27 @@ public class Uhr {
     public void setInc(int count) {
 
         if (count == 1) {
-            if (stunde == 0 || stunde < 24) {
+            if (stunde == 00 || stunde < 23) {
                 this.stunde++;
                 this.h.setText(this.stunde + "");
             } else {
-                this.stunde = 0;
+                this.stunde = 00;
                 this.h.setText(this.stunde + "");
             }
         }
 
         if (count == 2) {
-            if (minute < 59 || minute == 0) {
+            if (minute < 59 || minute == 00) {
                 this.minute++;
                 this.min.setText(this.minute + "");
             } else {
-                this.minute = 0;
+                this.minute = 00;
                 this.min.setText(this.minute + "");
                 if (this.stunde != 24) {
                     this.stunde++;
                     this.h.setText(this.stunde + "");
                 } else {
-                    this.stunde = 0;
+                    this.stunde = 00;
                     this.h.setText(this.stunde + "");
                 }
             }
@@ -56,21 +56,21 @@ public class Uhr {
      */
     public void setDec(int count) {
         if (count == 1) {
-            if ((stunde > 0 && stunde <= 24)) {
+            if ((stunde > 00 && stunde <= 24)) {
                 this.stunde--;
                 this.h.setText(this.stunde + "");
             } else {
-                this.stunde = 0;
+                this.stunde = 00;
                 this.h.setText(this.stunde + "");
             }
         }
 
         if (count == 2) {
-            if (minute < 59 || minute == 0) {
+            if (minute < 59 || minute == 00) {
                 this.minute++;
                 this.min.setText(this.minute + "");
             } else {
-                if (this.stunde != 0) {
+                if (this.stunde != 00) {
                     this.minute = 59;
                     this.min.setText(this.minute + "");
                     this.stunde--;
