@@ -12,12 +12,79 @@ public class Uhr {
     private JButton dec;
     private JButton inc;
     private JPanel Uhr;
-    private JLabel hour;
+    private JLabel h;
     private JLabel min;
+    public int stunde = 00;
+    public int minute = 00;
+    public static int count = 0;
+
+    public void setInc(int count) {
+
+        if (count == 1) {
+            if (stunde == 0 || stunde < 24) {
+                this.stunde++;
+                this.h.setText(this.stunde + "");
+            } else {
+                this.stunde = 0;
+                this.h.setText(this.stunde + "");
+            }
+        }
+
+        if (count == 2) {
+            if (minute < 59 || minute == 0) {
+                this.minute++;
+                this.min.setText(this.minute + "");
+            } else {
+                this.minute = 0;
+                this.min.setText(this.minute + "");
+                if (this.stunde != 24) {
+                    this.stunde++;
+                    this.h.setText(this.stunde + "");
+                } else {
+                    this.stunde = 0;
+                    this.h.setText(this.stunde + "");
+                }
+            }
+        }
+    }
+
+
+    /**
+     * verringert die Uhrzeit
+     *
+     * @param count zaehlt wie oft gedrueckt wurde
+     */
+    public void setDec(int count) {
+        if (count == 1) {
+            if ((stunde > 0 && stunde <= 24)) {
+                this.stunde--;
+                this.h.setText(this.stunde + "");
+            } else {
+                this.stunde = 0;
+                this.h.setText(this.stunde + "");
+            }
+        }
+
+        if (count == 2) {
+            if (minute < 59 || minute == 0) {
+                this.minute++;
+                this.min.setText(this.minute + "");
+            } else {
+                if (this.stunde != 0) {
+                    this.minute = 59;
+                    this.min.setText(this.minute + "");
+                    this.stunde--;
+                    this.h.setText(this.stunde + "");
+                }
+            }
+        }
+    }
+
 
     public Uhr() {
-        int count = 1;
         set.addActionListener(new ActionListener() {
+
+
             /**
              * Invoked when an action occurs.
              *
@@ -25,7 +92,11 @@ public class Uhr {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                count++;
+                if (count > 2) {
+                    count = 0;
+                } else {
+                    count++;
+                }
             }
         });
         inc.addActionListener(new ActionListener() {
@@ -36,7 +107,19 @@ public class Uhr {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                setInc(count);
+            }
+        });
 
+        dec.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDec(count);
             }
         });
     }
